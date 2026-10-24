@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hady Nawaz · Data, IA &amp; Marketing</title>
+<meta name="description" content="Portfolio de Hady Nawaz, étudiant en Data Marketing &amp; IA à l'Efrei Paris et alternant Data / BI Analyst chez SNCF Réseau.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hady Nawaz · Data, IA &amp; Marketing">
+<meta property="og:description" content="Portfolio de Hady Nawaz, étudiant en Data Marketing &amp; IA à l'Efrei Paris et alternant Data / BI Analyst chez SNCF Réseau.">
+<meta name="theme-color" content="#2F4BFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232F4BFF'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='800' fill='white' text-anchor='middle'%3EHN%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+
+/* Layout: one 1120px column under a sticky bar; hero = identity left + SQL console right;
+   sections alternate pale blue / white; contact and footer close on a night-blue band.
+   Single light theme, on Hady's own palette. */
+:root{
+  color-scheme: light;
+  /* Palette fournie */
+  --bg:#F5F7FF;        /* fond bleu très pâle */
+  --white:#FFFFFF;     /* fond blanc */
+  --title:#0A1240;     /* bleu nuit : titres et bandes sombres */
+  --text:#3A4A8C;      /* bleu ardoise : texte courant */
+  --brand:#2F4BFF;     /* bleu électrique : marque et boutons */
+  --light:#8EA2FF;     /* accents bleu clair sur le bleu nuit */
+  --line:#DCE3FF;      /* bordures */
+  --fill:#E6EBFF;      /* aplats */
+  /* Dérivés de la palette */
+  --soft:#52609A;      /* texte secondaire */
+  --night-2:#121D5C;   /* panneau posé sur le bleu nuit */
+  --night-line:#26337A;
+  --night-muted:#7183D6;
+  --font-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --font-body:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --radius:10px;
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--white)}
+h1,h2,h3{color:var(--title)}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
+.wrap{max-width:1120px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:40;background:var(--brand);color:var(--white);padding:8px 14px;border-radius:6px;font-weight:600;text-decoration:none}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+
+/* ---------- Top bar ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--white) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-mono);font-size:.85rem;color:var(--title)}
+.brand-mark{width:32px;height:32px;border-radius:7px;display:grid;place-items:center;background:var(--brand);color:var(--white);font-family:var(--font-display);font-weight:800;font-stretch:115%;font-size:.8rem;letter-spacing:.02em}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{padding:8px 11px;border-radius:6px;text-decoration:none;color:var(--text);font-size:.875rem;transition:color .15s,background .15s}
+.nav a:hover{color:var(--title);background:var(--fill)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--white);font-family:var(--font-mono);font-size:.75rem;flex-shrink:0}
+.lang button{appearance:none;border:0;background:transparent;cursor:pointer;padding:5px 12px;border-radius:999px;color:var(--text);font:inherit;letter-spacing:.08em}
+.lang button:hover{color:var(--title)}
+.lang button[aria-pressed="true"]{background:var(--brand);color:var(--white);font-weight:500}
+@media (max-width:860px){.nav{display:none}.lang{margin-left:auto}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--bg);border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(ellipse 75% 75% at 72% 35%,#000 25%,transparent 72%);
+  mask-image:radial-gradient(ellipse 75% 75% at 72% 35%,#000 25%,transparent 72%)}
+.hero::after{content:"";position:absolute;width:640px;height:640px;right:-170px;top:-230px;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--light) 38%,transparent) 0%,transparent 65%)}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center;padding-block:80px 92px}
+.hero-copy{min-width:0}
+.status{display:inline-flex;align-items:center;gap:10px;margin:0 0 28px;padding:6px 14px 6px 11px;border:1px solid var(--line);border-radius:999px;background:var(--white);font-family:var(--font-mono);font-size:.78rem;color:var(--text)}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--brand);flex-shrink:0;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--brand) 45%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+h1{margin:0;font-family:var(--font-display);font-stretch:120%;font-weight:800;font-size:clamp(3rem,8vw,5.9rem);line-height:.92;letter-spacing:-.025em}
+h1 span{display:block}
+.trio{margin:18px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:.15em .45em;font-family:var(--font-display);font-stretch:115%;font-weight:600;font-size:clamp(1.35rem,3vw,2rem);line-height:1.2;color:var(--brand)}
+.trio .sep{color:var(--light);font-weight:400}
+.lede{margin:24px 0 0;max-width:54ch;font-size:1.125rem;color:var(--text)}
+.lede sup{font-size:.65em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .15s,border-color .15s,color .15s}
+.btn-primary{background:var(--brand);color:var(--white)}
+.btn-primary:hover{background:var(--title)}
+.btn-ghost{border-color:var(--line);background:var(--white);color:var(--title)}
+.btn-ghost:hover{border-color:var(--brand);background:var(--fill)}
+.facts{list-style:none;padding:0;margin:34px 0 0;display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--font-mono);font-size:.78rem;color:var(--soft)}
+.facts li{display:flex;align-items:center;gap:8px}
+.facts li::before{content:"";width:5px;height:5px;border-radius:1px;background:var(--brand)}
+
+/* SQL console : bleu nuit, accents bleu clair */
+.console{margin:0;min-width:0;background:var(--title);border:1px solid var(--title);border-radius:12px;overflow:hidden;font-family:var(--font-mono);font-size:.84rem;color:var(--line);
+  box-shadow:0 40px 80px -36px color-mix(in srgb,var(--brand) 55%,transparent)}
+.console-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--night-line);font-size:.75rem;color:var(--night-muted)}
+.dots{display:flex;gap:6px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--night-line)}
+.console-file{color:var(--light)}
+.console-engine{margin-left:auto}
+.query{margin:0;padding:18px 18px 16px;line-height:1.75;white-space:pre;overflow-x:auto;color:var(--line);font:inherit}
+.query .k{color:var(--light);font-weight:500}
+.query .c{color:var(--night-muted)}
+.query .s{color:var(--white)}
+.caret{display:inline-block;width:.55em;height:1.1em;margin-left:3px;vertical-align:-.2em;background:var(--light);animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.result-wrap{overflow-x:auto;border-top:1px solid var(--night-line)}
+.result{width:100%;border-collapse:collapse}
+.result th{text-align:left;font-weight:500;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--night-muted);padding:10px 18px;border-bottom:1px solid var(--night-line)}
+.result td{padding:11px 18px;border-bottom:1px solid var(--night-line);vertical-align:top;color:var(--fill)}
+.result tr:last-child td{border-bottom:0}
+.result td:first-child{white-space:nowrap;color:var(--white)}
+.row-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:10px;vertical-align:1px;background:var(--dot)}
+.r-data{--dot:var(--brand)}.r-ia{--dot:var(--light)}.r-mkt{--dot:var(--white)}
+.console-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 12px;padding:10px 18px;border-top:1px solid var(--night-line);background:var(--night-2);font-size:.72rem;color:var(--night-muted)}
+.console-foot .ok{color:var(--light)}
+@media (max-width:920px){.hero-grid{grid-template-columns:minmax(0,1fr);gap:44px;padding-block:56px 64px}}
+
+/* ---------- Sections ---------- */
+.section{--card:var(--white);background:var(--bg);padding-block:96px;border-bottom:1px solid var(--line)}
+.section.alt{--card:var(--bg);background:var(--white)}
+.section.dark{background:var(--title);border-bottom:1px solid var(--night-line);color:var(--line)}
+.dark h2{color:var(--white)}
+.dark .eyebrow{color:var(--light)}
+.dark .section-intro{color:var(--line)}
+.dark a:focus-visible,.dark button:focus-visible{outline-color:var(--light)}
+@media (max-width:700px){.section{padding-block:64px}}
+.section-head{margin-bottom:44px}
+.eyebrow{margin:0 0 12px;font-family:var(--font-mono);font-size:.8rem;letter-spacing:.04em;color:var(--brand)}
+h2{margin:0;max-width:24ch;font-family:var(--font-display);font-stretch:112%;font-weight:700;font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+.section-intro{margin:16px 0 0;max-width:62ch;font-size:1.0625rem;color:var(--text)}
+h3{text-wrap:balance}
+
+/* Pastilles des trois domaines */
+.p-label,.ptag{--dot:var(--brand)}
+.p-label.ia,.ptag.ia{--dot:var(--light)}
+.p-label.mkt,.ptag.mkt{--dot:var(--title)}
+.ptag.ux{--dot:var(--soft)}
+
+/* Pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.pillar{display:flex;flex-direction:column;padding:28px 28px 4px;border-left:1px solid var(--line);min-width:0}
+.pillar:first-child{border-left:0;padding-left:0}
+.pillar:last-child{padding-right:0}
+.p-label{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--title)}
+.p-label::before{content:"";width:10px;height:10px;border-radius:2px;background:var(--dot)}
+.pillar h3{margin:16px 0 10px;font-family:var(--font-display);font-stretch:108%;font-weight:650;font-size:1.3rem;line-height:1.25}
+.pillar p{margin:0;color:var(--text)}
+.pillar .proof{margin-top:auto;padding-top:18px;font-family:var(--font-mono);font-size:.78rem;color:var(--title)}
+.proof-inner{display:block;padding-top:14px;border-top:1px dashed var(--light)}
+@media (max-width:860px){
+  .pillars{grid-template-columns:minmax(0,1fr)}
+  .pillar,.pillar:first-child,.pillar:last-child{padding:26px 0;border-left:0;border-bottom:1px solid var(--line)}
+  .pillar:last-child{border-bottom:0}
+}
+
+/* Experience timeline */
+.timeline{list-style:none;margin:0;padding:0}
+.job{display:grid;grid-template-columns:190px minmax(0,1fr);gap:32px;padding-block:34px;border-top:1px solid var(--line)}
+.job:first-child{border-top:0;padding-top:0}
+.job-when{display:flex;flex-direction:column;align-items:flex-start;gap:10px;font-family:var(--font-mono);font-size:.82rem;color:var(--soft);font-variant-numeric:tabular-nums}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--white);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text);white-space:nowrap}
+.pill.live{border-color:var(--light);background:var(--fill);color:var(--brand)}
+.pill.live::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.job-body{min-width:0}
+.job h3{margin:0;font-family:var(--font-display);font-stretch:108%;font-weight:650;font-size:1.35rem;line-height:1.25}
+.org{margin:6px 0 0;font-weight:600;color:var(--title)}
+.org-sub{font-weight:400;color:var(--text)}
+.bullets{margin:16px 0 0;padding-left:1.1em;display:grid;gap:7px;max-width:70ch;color:var(--text)}
+.bullets li::marker{color:var(--brand)}
+.bullets strong{color:var(--title);font-weight:600}
+.tags{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:4px 9px;border-radius:5px;background:var(--fill);font-family:var(--font-mono);font-size:.72rem;color:var(--text)}
+@media (max-width:760px){.job{grid-template-columns:minmax(0,1fr);gap:14px}.job-when{flex-direction:row;flex-wrap:wrap;align-items:center}}
+
+/* Projects */
+.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);transition:border-color .2s}
+.card:hover{border-color:var(--brand)}
+.card-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px}
+.ptags{display:flex;flex-wrap:wrap;gap:12px}
+.ptag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--title)}
+.ptag::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--dot)}
+.ctx{font-family:var(--font-mono);font-size:.72rem;color:var(--soft)}
+.card h3{margin:4px 0 0;font-family:var(--font-display);font-stretch:106%;font-weight:650;font-size:1.2rem;line-height:1.3}
+.card p{margin:0;font-size:.95rem;color:var(--text)}
+.tools{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:.75rem;color:var(--title)}
+.card.featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:36px;padding:32px}
+.feat-copy{display:flex;flex-direction:column;gap:12px;min-width:0}
+.feat-copy h3{font-size:1.55rem}
+.stats{align-self:center;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--night-line);border:1px solid var(--title);border-radius:8px;overflow:hidden}
+.stat{padding:24px 20px;background:var(--title)}
+.stat b{display:block;font-family:var(--font-display);font-stretch:118%;font-weight:800;font-size:clamp(2.1rem,4.4vw,3rem);line-height:1;color:var(--light);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat span{display:block;margin-top:10px;font-size:.84rem;color:var(--line)}
+@media (max-width:980px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.projects{grid-template-columns:minmax(0,1fr)}.card.featured{grid-template-columns:minmax(0,1fr);gap:24px;padding:24px}}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.skill-col{min-width:0;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+.skill-col h3{margin:0;font-family:var(--font-display);font-stretch:108%;font-weight:650;font-size:1.15rem}
+.skill-col .p-label{margin-bottom:10px}
+.skill-list{list-style:none;margin:16px 0 0;padding:0}
+.skill-list li{display:flex;flex-direction:column;gap:2px;padding:11px 0;border-top:1px solid var(--line)}
+.skill-name{font-weight:600;color:var(--title)}
+.skill-detail{font-size:.86rem;color:var(--soft)}
+.skill-list li.next{margin-top:6px;padding:12px;border:1px dashed var(--light);border-radius:8px;background:var(--bg)}
+.skill-list li.next .pill{align-self:flex-start;margin-bottom:6px}
+.skills-extra{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:20px}
+.extra{min-width:0;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+.extra h3{margin:0 0 16px;font-family:var(--font-display);font-stretch:108%;font-weight:650;font-size:1.15rem}
+.cefr-row{display:grid;grid-template-columns:96px minmax(0,1fr) 54px;align-items:center;gap:14px;padding:8px 0}
+.cefr-row.head{padding:0 0 4px}
+.cefr{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}
+.cefr i{height:8px;border-radius:2px;background:var(--fill)}
+.cefr i.on{background:var(--brand)}
+.cefr.native i{background:var(--title)}
+.cefr-scale{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;font-family:var(--font-mono);font-size:.66rem;color:var(--soft);text-align:center}
+.lang-name{font-weight:600;color:var(--title)}
+.lang-level{font-family:var(--font-mono);font-size:.78rem;color:var(--soft);text-align:right}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg);font-size:.88rem;color:var(--title)}
+@media (max-width:900px){.skills{grid-template-columns:minmax(0,1fr)}.skills-extra{grid-template-columns:minmax(0,1fr)}}
+
+/* Education */
+.edu{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.edu-item{display:grid;grid-template-columns:190px minmax(0,1fr);gap:32px;padding:22px 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+.edu-item.next{background:transparent;border-style:dashed;border-color:var(--light)}
+.edu-when{display:flex;flex-direction:column;align-items:flex-start;gap:10px;font-family:var(--font-mono);font-size:.82rem;color:var(--soft);font-variant-numeric:tabular-nums}
+.edu-body{min-width:0}
+.edu-body h3{margin:0;font-family:var(--font-display);font-stretch:108%;font-weight:650;font-size:1.2rem;line-height:1.3}
+.edu-body p{margin:8px 0 0;color:var(--text);max-width:70ch}
+.edu-body p.org{margin-top:4px;font-weight:500;color:var(--title)}
+@media (max-width:760px){.edu-item{grid-template-columns:minmax(0,1fr);gap:10px}.edu-when{flex-direction:row;flex-wrap:wrap;align-items:center}}
+
+/* Contact : bande bleu nuit */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:start}
+.contact-card{min-width:0;border:1px solid var(--night-line);border-radius:12px;background:var(--night-2);overflow:hidden}
+.contact-row{display:grid;grid-template-columns:110px minmax(0,1fr) auto;align-items:center;gap:16px;padding:18px 20px;border-top:1px solid var(--night-line)}
+.contact-row:first-child{border-top:0}
+.contact-k{font-family:var(--font-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--light)}
+.contact-v{font-family:var(--font-mono);font-size:.92rem;color:var(--white);overflow-wrap:anywhere;user-select:all}
+.contact-actions{display:flex;gap:8px}
+.mini{appearance:none;cursor:pointer;display:inline-flex;align-items:center;padding:7px 12px;border-radius:6px;border:1px solid var(--night-line);background:transparent;color:var(--white);font:500 .8rem var(--font-body);text-decoration:none;white-space:nowrap;transition:border-color .15s,background .15s}
+.mini:hover{border-color:var(--light);background:var(--title)}
+.mini.done{border-color:var(--light);color:var(--light)}
+@media (max-width:860px){.contact-grid{grid-template-columns:minmax(0,1fr);gap:32px}}
+@media (max-width:520px){.contact-row{grid-template-columns:minmax(0,1fr) auto;gap:6px 12px}.contact-k{grid-column:1/-1}}
+
+/* Footer */
+.footer{background:var(--title)}
+.footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-block:28px 36px;font-family:var(--font-mono);font-size:.75rem;color:var(--night-muted)}
+.footer a{color:var(--light);text-decoration:none}
+.footer a:hover{color:var(--white)}
+.footer a:focus-visible{outline-color:var(--light)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pulse,.caret{animation:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Aller au contenu</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Hady Nawaz">
+      <span class="brand-mark" aria-hidden="true">HN</span>
+      <span>hady.nawaz</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#profil" data-i18n="nav_profile">Profil</a>
+      <a href="#experiences" data-i18n="nav_exp">Expériences</a>
+      <a href="#projets" data-i18n="nav_projects">Projets</a>
+      <a href="#competences" data-i18n="nav_skills">Compétences</a>
+      <a href="#formation" data-i18n="nav_edu">Formation</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" id="lang-fr" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="status"><span class="pulse" aria-hidden="true"></span><span data-i18n="status">Alternant Data / BI Analyst · SNCF Réseau</span></p>
+      <h1><span>Hady</span> <span>Nawaz</span></h1>
+      <p class="trio"><span class="t-data">Data</span><span class="sep">/</span><span class="t-ia" data-i18n="tag_ia">IA</span><span class="sep">/</span><span class="t-mkt">Marketing</span></p>
+      <p class="lede" data-i18n="lede">Étudiant en 3<sup>e</sup> année de Bachelor Data Marketing &amp; IA à l'Efrei Paris, je transforme les données en tableaux de bord qui aident à décider, avec un regard marketing. Je vise à terme un poste d'AI / LLM Engineer.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#projets" data-i18n="cta_projects">Voir mes projets</a>
+        <a class="btn btn-ghost" href="#contact" data-i18n="cta_contact">Me contacter</a>
+      </div>
+      <ul class="facts">
+        <li>Île-de-France</li>
+        <li>FR · EN · ES</li>
+        <li data-i18n="fact_master">Master en alternance visé pour 2027</li>
+      </ul>
+    </div>
+
+    <figure class="console">
+      <figcaption class="sr-only" data-i18n="console_caption">Mes compétences présentées sous forme de requête SQL</figcaption>
+      <div class="console-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="console-file" data-i18n="console_file">profil.sql</span>
+        <span class="console-engine">SQL</span>
+      </div>
+<pre class="query"><code data-i18n="q_code"><span class="c">-- ce que j'apporte à une équipe</span>
+<span class="k">SELECT</span> domaine, outils
+<span class="k">FROM</span> hady.competences
+<span class="k">WHERE</span> statut = <span class="s">'utilisé'</span>;<span class="caret" aria-hidden="true"></span></code></pre>
+      <div class="result-wrap">
+        <table class="result">
+          <thead><tr><th data-i18n="r_h1">domaine</th><th data-i18n="r_h2">outils</th></tr></thead>
+          <tbody>
+            <tr><td><span class="row-dot r-data" aria-hidden="true"></span>data</td><td>Power BI · DAX · SQL · Snowflake</td></tr>
+            <tr><td><span class="row-dot r-ia" aria-hidden="true"></span><span data-i18n="r_ia">ia</span></td><td data-i18n="r_ia_tools">Python · IA générative · Power Automate</td></tr>
+            <tr><td><span class="row-dot r-mkt" aria-hidden="true"></span>marketing</td><td>Google Ads · SEO / SEA · Shopify</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="console-foot">
+        <span><span class="ok">✓</span> <span data-i18n="console_rows">3 lignes renvoyées</span></span>
+        <span data-i18n="console_date">mis à jour : oct. 2026</span>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="section alt" id="profil">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="eb_profile">// profil</p>
+      <h2 data-i18n="profile_title">À la croisée de la data, de l'IA et du marketing</h2>
+      <p class="section-intro" data-i18n="profile_intro">Mon parcours mêle analyse de données, culture marketing et intérêt fort pour l'IA. Je relie les chiffres aux personnes qui les utilisent.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="p-label data">Data</span>
+        <h3 data-i18n="pl_data_h">Des tableaux de bord qui servent la décision</h3>
+        <p data-i18n="pl_data_p">Power BI de bout en bout : modélisation, mesures DAX, Power Query et publication. Je travaille sur de gros volumes avec SQL et Snowflake.</p>
+        <p class="proof"><span class="proof-inner" data-i18n="pl_data_proof">~90 M de lignes optimisées chez Siemens Healthineers</span></p>
+      </div>
+      <div class="pillar">
+        <span class="p-label ia" data-i18n="tag_ia">IA</span>
+        <h3 data-i18n="pl_ia_h">Une montée en compétences engagée</h3>
+        <p data-i18n="pl_ia_p">Cours d'IA à l'Efrei et à l'Asia Pacific University, Python, IA générative pour créer du contenu. Mon objectif est de devenir AI / LLM Engineer.</p>
+        <p class="proof"><span class="proof-inner" data-i18n="pl_ia_proof">Prompt vidéo IA conçu pour la campagne Burgouzz</span></p>
+      </div>
+      <div class="pillar">
+        <span class="p-label mkt">Marketing</span>
+        <h3 data-i18n="pl_mkt_h">Comprendre le client derrière la donnée</h3>
+        <p data-i18n="pl_mkt_p">Campagnes Google Ads, SEO / SEA, e-commerce sous Shopify et WordPress, stratégie de contenu et plan média.</p>
+        <p class="proof"><span class="proof-inner" data-i18n="pl_mkt_proof">Plan média sur 4 canaux pour 1 200 commandes visées</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experiences">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="eb_exp">// expériences</p>
+      <h2 data-i18n="exp_title">Expériences professionnelles</h2>
+    </div>
+    <ol class="timeline">
+      <li class="job">
+        <div class="job-when">
+          <span data-i18n="sncf_when">sept. 2026 – août 2027</span>
+          <span class="pill live" data-i18n="live">En cours</span>
+        </div>
+        <div class="job-body">
+          <h3 data-i18n="sncf_role">Data / BI Analyst · Alternance</h3>
+          <p class="org">SNCF Réseau <span class="org-sub" data-i18n="sncf_org">· DIPR, Pôle Performance · Saint-Denis</span></p>
+          <ul class="bullets" data-i18n="sncf_list"><li>Développement de tableaux de bord Power BI pour suivre la performance des projets de régénération du réseau ferré.</li><li>Gestion des accès SharePoint de la direction.</li><li>Accompagnement et formation des équipes DIPR aux outils numériques.</li></ul>
+          <ul class="tags"><li class="tag">Power BI</li><li class="tag">SharePoint</li></ul>
+        </div>
+      </li>
+      <li class="job">
+        <div class="job-when">
+          <span data-i18n="sie_when">juin – juil. 2026</span>
+        </div>
+        <div class="job-body">
+          <h3 data-i18n="sie_role">Business Intelligence Analyst · Stage</h3>
+          <p class="org">Siemens Healthineers <span class="org-sub" data-i18n="sie_org">· Direction Customer Service · Courbevoie</span></p>
+          <ul class="bullets" data-i18n="sie_list"><li><strong>Audit et optimisation :</strong> analyse de plus de 10 dashboards Power BI, identification des KPIs manquants et des axes d'amélioration.</li><li><strong>Modélisation DAX :</strong> création de mesures calculées (KPIs dérivés) pour enrichir les tableaux de bord existants.</li><li><strong>Power Query et Snowflake :</strong> optimisation des flux de données sur un dataset d'environ 90 millions de lignes.</li><li><strong>Déploiement :</strong> publication et partage des dashboards via Power BI Service.</li></ul>
+          <ul class="tags"><li class="tag">Power BI</li><li class="tag">DAX</li><li class="tag">Power Query</li><li class="tag">Snowflake</li><li class="tag">SQL</li></ul>
+        </div>
+      </li>
+      <li class="job">
+        <div class="job-when">
+          <span data-i18n="web_when">mai – juin 2025</span>
+        </div>
+        <div class="job-body">
+          <h3 data-i18n="web_role">Digital Marketing Specialist · Stage</h3>
+          <p class="org">Weweb Agency <span class="org-sub" data-i18n="web_org">· Agence web · Massy</span></p>
+          <ul class="bullets" data-i18n="web_list"><li><strong>E-commerce :</strong> gestion de projets de boutiques en ligne sur Shopify et WordPress.</li><li><strong>Analyse de marché :</strong> étude des tendances avec Google Ads et Google Trends.</li><li><strong>SEO / SEA :</strong> mise en place et suivi de campagnes Google Ads.</li></ul>
+          <ul class="tags"><li class="tag">Shopify</li><li class="tag">WordPress</li><li class="tag">Google Ads</li><li class="tag">Google Trends</li></ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section alt" id="projets">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="eb_projects">// projets</p>
+      <h2 data-i18n="projects_title">Projets sélectionnés</h2>
+      <p class="section-intro" data-i18n="projects_intro">Projets professionnels, académiques et personnels, menés seul ou en équipe.</p>
+    </div>
+    <div class="projects">
+      <article class="card featured">
+        <div class="feat-copy">
+          <div class="card-top">
+            <div class="ptags"><span class="ptag data">Data</span></div>
+            <span class="ctx" data-i18n="f_ctx">Stage · Siemens Healthineers</span>
+          </div>
+          <h3 data-i18n="f_title">Optimisation des dashboards Customer Service</h3>
+          <p data-i18n="f_p">Restructuration de 10 dashboards Power BI de la direction Customer Service : escalades P1, gestion des coûts et KPIs opérationnels. Les données passent par un pipeline Snowflake et Power Query d'environ 90 millions de lignes.</p>
+          <div class="tools">Power BI · DAX · Power Query · Snowflake · Power BI Service</div>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>10</b><span data-i18n="f_s1">dashboards Power BI restructurés</span></div>
+          <div class="stat"><b data-i18n="f_s2v">~90 M</b><span data-i18n="f_s2">lignes traitées via Snowflake</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div class="ptags"><span class="ptag data">Data</span></div>
+          <span class="ctx" data-i18n="p1_ctx">Alternance · en cours</span>
+        </div>
+        <h3 data-i18n="p1_title">Pilotage de la performance des projets de régénération</h3>
+        <p data-i18n="p1_p">Tableaux de bord Power BI pour suivre l'avancement et la performance des projets de régénération du réseau ferré chez SNCF Réseau.</p>
+        <div class="tools">Power BI · SharePoint</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div class="ptags"><span class="ptag data">Data</span></div>
+          <span class="ctx" data-i18n="p2_ctx">Projet personnel</span>
+        </div>
+        <h3 data-i18n="p2_title">Analyse et visualisation de données de santé</h3>
+        <p data-i18n="p2_p">Projet BI mené en autonomie : modélisation des données, analyse et visualisation interactive.</p>
+        <div class="tools">Power BI · MySQL</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div class="ptags"><span class="ptag mkt">Marketing</span><span class="ptag ia" data-i18n="tag_ia">IA</span></div>
+          <span class="ctx" data-i18n="p3_ctx">Efrei · en binôme</span>
+        </div>
+        <h3 data-i18n="p3_title">Burgouzz : stratégie de contenu et plan média</h3>
+        <p data-i18n="p3_p">Pour une marque de smash burger fictive : persona, charte éditoriale, brief agence et calendrier sur deux semaines. Objectif de 1 200 commandes en 6 semaines pour un budget de 5 000 €, avec un prompt vidéo IA pour le Reel de lancement.</p>
+        <div class="tools" data-i18n="p3_tools">Instagram · Meta Ads · Email · TikTok · IA générative</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div class="ptags"><span class="ptag data">Data</span><span class="ptag mkt">Marketing</span></div>
+          <span class="ctx" data-i18n="p4_ctx">Efrei · individuel</span>
+        </div>
+        <h3 data-i18n="p4_title">« L'eau douce disparaît » : infographie data</h3>
+        <p data-i18n="p4_p">Campagne fictive d'ONG pour la Journée mondiale de l'eau : au moins 8 données sourcées mises en image, en 100 % vectoriel, déclinées en carrousel LinkedIn et en affiche A4.</p>
+        <div class="tools" data-i18n="p4_tools">Adobe Illustrator · Data visualisation</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div class="ptags"><span class="ptag mkt">Marketing</span><span class="ptag ux">UX</span></div>
+          <span class="ctx" data-i18n="p5_ctx">Efrei · équipe de 3 · en cours</span>
+        </div>
+        <h3 data-i18n="p5_title">Refonte UX du site Azureva</h3>
+        <p data-i18n="p5_p">Refonte d'un site de voyage dans le cadre du cours de test et validation utilisateur. Je conçois la page de la résidence Piau-Engaly en hiver, en wireframes desktop et mobile.</p>
+        <div class="tools" data-i18n="p5_tools">Figma · Tests utilisateurs</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <div class="ptags"><span class="ptag mkt">Marketing</span></div>
+          <span class="ctx" data-i18n="p6_ctx">Stage · Weweb Agency</span>
+        </div>
+        <h3 data-i18n="p6_title">Boutique en ligne et campagnes Google Ads</h3>
+        <p data-i18n="p6_p">Gestion complète d'une boutique en ligne, analyse de marché et pilotage de campagnes Google Ads.</p>
+        <div class="tools">Shopify · WordPress · Google Ads · Google Trends</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="competences">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="eb_skills">// compétences</p>
+      <h2 data-i18n="skills_title">Compétences</h2>
+    </div>
+    <div class="skills">
+      <div class="skill-col">
+        <span class="p-label data">Data</span>
+        <h3>Data &amp; BI</h3>
+        <ul class="skill-list">
+          <li><span class="skill-name">Power BI</span><span class="skill-detail">DAX, Power Query, Power BI Service</span></li>
+          <li><span class="skill-name">SQL / MySQL</span><span class="skill-detail" data-i18n="sk_sql">Requêtes et bases relationnelles · DbVisualizer</span></li>
+          <li><span class="skill-name">Snowflake</span><span class="skill-detail" data-i18n="sk_snow">Traitement de gros volumes de données</span></li>
+          <li><span class="skill-name" data-i18n="sk_model">Modélisation de données</span><span class="skill-detail" data-i18n="sk_model_d">KPIs et mesures calculées</span></li>
+          <li><span class="skill-name">Excel</span><span class="skill-detail" data-i18n="sk_excel">Analyse de données</span></li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <span class="p-label ia" data-i18n="tag_ia">IA</span>
+        <h3 data-i18n="sk_ia_title">IA &amp; automatisation</h3>
+        <ul class="skill-list">
+          <li><span class="skill-name">Python</span><span class="skill-detail" data-i18n="sk_py">Niveau intermédiaire</span></li>
+          <li><span class="skill-name" data-i18n="sk_genai">IA générative</span><span class="skill-detail" data-i18n="sk_genai_d">Prompts pour la création de contenu</span></li>
+          <li><span class="skill-name">Power Automate</span><span class="skill-detail" data-i18n="sk_pa">Automatisation de flux</span></li>
+          <li><span class="skill-name" data-i18n="sk_aif">Fondamentaux de l'IA</span><span class="skill-detail" data-i18n="sk_aif_d">Cours à l'Efrei et à l'APU</span></li>
+          <li class="next"><span class="pill" data-i18n="sk_next_pill">En apprentissage</span><span class="skill-name" data-i18n="sk_next">RAG · agents LLM · LangChain</span><span class="skill-detail" data-i18n="sk_next_d">Prochaine étape vers l'AI Engineering</span></li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <span class="p-label mkt">Marketing</span>
+        <h3 data-i18n="sk_mkt_title">Marketing digital</h3>
+        <ul class="skill-list">
+          <li><span class="skill-name">Google Ads · SEO / SEA</span><span class="skill-detail" data-i18n="sk_ads">Création et suivi de campagnes</span></li>
+          <li><span class="skill-name">Google Trends</span><span class="skill-detail" data-i18n="sk_trends">Analyse de marché et de tendances</span></li>
+          <li><span class="skill-name">Shopify · WordPress · HTML / CSS</span><span class="skill-detail" data-i18n="sk_web">E-commerce et web</span></li>
+          <li><span class="skill-name" data-i18n="sk_content">Stratégie de contenu</span><span class="skill-detail" data-i18n="sk_content_d">Persona, charte éditoriale, plan média</span></li>
+          <li><span class="skill-name">Canva · Illustrator · Figma</span><span class="skill-detail" data-i18n="sk_design">Création visuelle et UX</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skills-extra">
+      <div class="extra">
+        <h3 data-i18n="sk_langs">Langues</h3>
+        <div class="cefr-row head" aria-hidden="true">
+          <span></span>
+          <span class="cefr-scale"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></span>
+          <span></span>
+        </div>
+        <div class="cefr-row">
+          <span class="lang-name" data-i18n="lg_fr">Français</span>
+          <span class="cefr native" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="lang-level" data-i18n="lg_native">Natif</span>
+        </div>
+        <div class="cefr-row">
+          <span class="lang-name" data-i18n="lg_en">Anglais</span>
+          <span class="cefr" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          <span class="lang-level">B2</span>
+        </div>
+        <div class="cefr-row">
+          <span class="lang-name" data-i18n="lg_es">Espagnol</span>
+          <span class="cefr" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+          <span class="lang-level">B1</span>
+        </div>
+      </div>
+      <div class="extra">
+        <h3 data-i18n="sk_soft">Savoir-être</h3>
+        <ul class="chips" data-i18n="sk_soft_list"><li>Autonomie et rigueur</li><li>Résolution de problèmes</li><li>Adaptabilité</li><li>Curiosité et veille data</li><li>Travail en équipe</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="formation">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="eb_edu">// formation</p>
+      <h2 data-i18n="edu_title">Formation</h2>
+    </div>
+    <ol class="edu">
+      <li class="edu-item next">
+        <div class="edu-when"><span>2027 – 2029</span><span class="pill" data-i18n="edu_seek">En recherche</span></div>
+        <div class="edu-body">
+          <h3 data-i18n="edu_m_title">Master data et IA en alternance</h3>
+          <p class="org">Île-de-France</p>
+        </div>
+      </li>
+      <li class="edu-item">
+        <div class="edu-when"><span>2024 – 2027</span><span class="pill live" data-i18n="live">En cours</span></div>
+        <div class="edu-body">
+          <h3 data-i18n="edu_b_title">Bachelor Data Marketing &amp; IA · Grade de Licence</h3>
+          <p class="org">Efrei Paris · Villejuif</p>
+          <p data-i18n="edu_b_p">3<sup>e</sup> année. Numérique, data, marketing digital et intelligence artificielle. Cours : SQL, Python, Power BI, business intelligence, marketing digital.</p>
+        </div>
+      </li>
+      <li class="edu-item">
+        <div class="edu-when"><span data-i18n="edu_apu_when">mai – juin 2026</span></div>
+        <div class="edu-body">
+          <h3 data-i18n="edu_apu_title">Programme académique international</h3>
+          <p class="org" data-i18n="edu_apu_org">Asia Pacific University (APU) · Kuala Lumpur, Malaisie</p>
+          <p data-i18n="edu_apu_p">Cours en anglais : business intelligence, digital ecosystem, intelligence artificielle, gestion de projet.</p>
+        </div>
+      </li>
+      <li class="edu-item">
+        <div class="edu-when"><span>2021 – 2024</span></div>
+        <div class="edu-body">
+          <h3 data-i18n="edu_bac_title">Baccalauréat général</h3>
+          <p class="org">Lycée Jean Rostand · Villepinte</p>
+          <p data-i18n="edu_bac_p">Spécialités mathématiques et NSI (numérique et sciences informatiques).</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section dark" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow">// contact</p>
+      <h2 data-i18n="contact_title">Restons en contact</h2>
+      <p class="section-intro" data-i18n="contact_p">Je suis ouvert aux échanges sur un master en alternance pour la rentrée 2027, ainsi que sur des projets data, IA ou marketing.</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-row">
+        <span class="contact-k">Email</span>
+        <span class="contact-v" id="email-text">hadynawaz93@gmail.com</span>
+        <span class="contact-actions">
+          <button type="button" class="mini" id="copy-email" data-i18n="copy">Copier</button>
+          <a class="mini" href="mailto:hadynawaz93@gmail.com" data-i18n="write">Écrire</a>
+        </span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-k">LinkedIn</span>
+        <span class="contact-v">linkedin.com/in/hady-nawaz</span>
+        <span class="contact-actions">
+          <a class="mini" href="https://www.linkedin.com/in/hady-nawaz" target="_blank" rel="noopener" data-i18n="view">Voir le profil ↗</a>
+        </span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-k" data-i18n="k_loc">Localisation</span>
+        <span class="contact-v">Île-de-France</span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span>© 2026 Hady Nawaz</span>
+    <span data-i18n="foot_made">Conçu et codé en HTML, CSS et JavaScript</span>
+    <a href="#top" data-i18n="foot_top">↑ Haut de page</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var EN = {
+    skip: "Skip to content",
+    nav_profile: "Profile", nav_exp: "Experience", nav_projects: "Projects", nav_skills: "Skills", nav_edu: "Education", nav_contact: "Contact",
+    status: "Work-study Data / BI Analyst · SNCF Réseau",
+    tag_ia: "AI",
+    lede: "Third-year student in the Data Marketing &amp; AI Bachelor's programme at Efrei Paris. I turn data into dashboards that support decisions, with a marketing mindset. My long-term goal is to become an AI / LLM Engineer.",
+    cta_projects: "See my projects", cta_contact: "Get in touch",
+    fact_master: "Seeking a work-study Master's for 2027",
+    console_caption: "My skills presented as a SQL query",
+    console_file: "profile.sql",
+    q_code: '<span class="c">-- what I bring to a team</span>\n<span class="k">SELECT</span> domain, tools\n<span class="k">FROM</span> hady.skills\n<span class="k">WHERE</span> status = <span class="s">\'in use\'</span>;<span class="caret" aria-hidden="true"></span>',
+    r_h1: "domain", r_h2: "tools", r_ia: "ai",
+    r_ia_tools: "Python · Generative AI · Power Automate",
+    console_rows: "3 rows returned", console_date: "updated: Oct 2026",
+    eb_profile: "// profile",
+    profile_title: "Where data, AI and marketing meet",
+    profile_intro: "My path combines data analysis, marketing know-how and a strong interest in AI. I connect the numbers to the people who use them.",
+    pl_data_h: "Dashboards that drive decisions",
+    pl_data_p: "End-to-end Power BI: data modelling, DAX measures, Power Query and publishing. I work with large volumes using SQL and Snowflake.",
+    pl_data_proof: "~90M rows optimised at Siemens Healthineers",
+    pl_ia_h: "Building AI skills, step by step",
+    pl_ia_p: "AI courses at Efrei and Asia Pacific University, Python, and generative AI for content creation. My goal is to become an AI / LLM Engineer.",
+    pl_ia_proof: "AI video prompt designed for the Burgouzz campaign",
+    pl_mkt_h: "Understanding the customer behind the data",
+    pl_mkt_p: "Google Ads campaigns, SEO / SEA, e-commerce on Shopify and WordPress, content strategy and media planning.",
+    pl_mkt_proof: "4-channel media plan targeting 1,200 orders",
+    eb_exp: "// experience", exp_title: "Professional experience", live: "Current",
+    sncf_when: "Sep 2026 – Aug 2027",
+    sncf_role: "Data / BI Analyst · Work-study",
+    sncf_org: "· DIPR, Performance team · Saint-Denis",
+    sncf_list: "<li>Building Power BI dashboards to track the performance of railway network renewal projects.</li><li>Managing SharePoint access for the department.</li><li>Supporting and training DIPR teams on digital tools.</li>",
+    sie_when: "Jun – Jul 2026",
+    sie_role: "Business Intelligence Analyst · Internship",
+    sie_org: "· Customer Service department · Courbevoie",
+    sie_list: "<li><strong>Audit &amp; optimisation:</strong> reviewed 10+ Power BI dashboards, identifying missing KPIs and areas for improvement.</li><li><strong>DAX modelling:</strong> built calculated measures (derived KPIs) to enrich existing dashboards.</li><li><strong>Power Query &amp; Snowflake:</strong> optimised data flows on a dataset of about 90 million rows.</li><li><strong>Deployment:</strong> published and shared dashboards through Power BI Service.</li>",
+    web_when: "May – Jun 2025",
+    web_role: "Digital Marketing Specialist · Internship",
+    web_org: "· Web agency · Massy",
+    web_list: "<li><strong>E-commerce:</strong> managed online store projects on Shopify and WordPress.</li><li><strong>Market analysis:</strong> tracked trends with Google Ads and Google Trends.</li><li><strong>SEO / SEA:</strong> set up and monitored Google Ads campaigns.</li>",
+    eb_projects: "// projects", projects_title: "Selected projects",
+    projects_intro: "Professional, academic and personal projects, solo and in teams.",
+    f_ctx: "Internship · Siemens Healthineers",
+    f_title: "Optimising Customer Service dashboards",
+    f_p: "Restructured 10 Power BI dashboards for the Customer Service department: P1 escalations, cost management and operational KPIs. The data runs through a Snowflake and Power Query pipeline of about 90 million rows.",
+    f_s1: "Power BI dashboards restructured", f_s2v: "~90M", f_s2: "rows processed through Snowflake",
+    p1_ctx: "Work-study · ongoing",
+    p1_title: "Performance tracking for railway renewal projects",
+    p1_p: "Power BI dashboards to track the progress and performance of railway network renewal projects at SNCF Réseau.",
+    p2_ctx: "Personal project",
+    p2_title: "Healthcare data analysis and visualisation",
+    p2_p: "A self-driven BI project covering data modelling, analysis and interactive visualisation.",
+    p3_ctx: "Efrei · pair project",
+    p3_title: "Burgouzz: content strategy and media plan",
+    p3_p: "For a fictional smash burger brand: persona, editorial guidelines, agency brief and a two-week calendar. Target of 1,200 orders in 6 weeks on a €5,000 budget, plus an AI video prompt for the launch Reel.",
+    p3_tools: "Instagram · Meta Ads · Email · TikTok · Generative AI",
+    p4_ctx: "Efrei · solo",
+    p4_title: "“Fresh water is disappearing”: data infographic",
+    p4_p: "Fictional NGO campaign for World Water Day: at least 8 sourced data points turned into fully vector visuals, delivered as a LinkedIn carousel and an A4 poster.",
+    p4_tools: "Adobe Illustrator · Data visualisation",
+    p5_ctx: "Efrei · team of 3 · ongoing",
+    p5_title: "Azureva website UX redesign",
+    p5_p: "Redesign of a travel website for a user testing and validation course. I'm designing the Piau-Engaly winter residence page as desktop and mobile wireframes.",
+    p5_tools: "Figma · User testing",
+    p6_ctx: "Internship · Weweb Agency",
+    p6_title: "Online store and Google Ads campaigns",
+    p6_p: "End-to-end online store management, market analysis and Google Ads campaign management.",
+    eb_skills: "// skills", skills_title: "Skills",
+    sk_sql: "Queries and relational databases · DbVisualizer",
+    sk_snow: "Large-volume data processing",
+    sk_model: "Data modelling", sk_model_d: "KPIs and calculated measures",
+    sk_excel: "Data analysis",
+    sk_ia_title: "AI &amp; automation",
+    sk_py: "Intermediate level",
+    sk_genai: "Generative AI", sk_genai_d: "Prompting for content creation",
+    sk_pa: "Workflow automation",
+    sk_aif: "AI fundamentals", sk_aif_d: "Coursework at Efrei and APU",
+    sk_next_pill: "Learning", sk_next: "RAG · LLM agents · LangChain", sk_next_d: "Next step towards AI engineering",
+    sk_mkt_title: "Digital marketing",
+    sk_ads: "Campaign setup and tracking",
+    sk_trends: "Market and trend analysis",
+    sk_web: "E-commerce and web",
+    sk_content: "Content strategy", sk_content_d: "Persona, editorial guidelines, media plan",
+    sk_design: "Visual design and UX",
+    sk_langs: "Languages", lg_fr: "French", lg_native: "Native", lg_en: "English", lg_es: "Spanish",
+    sk_soft: "Soft skills",
+    sk_soft_list: "<li>Autonomy and rigour</li><li>Problem solving</li><li>Adaptability</li><li>Curiosity and data watch</li><li>Teamwork</li>",
+    eb_edu: "// education", edu_title: "Education",
+    edu_seek: "Seeking",
+    edu_m_title: "Work-study Master's in data and AI",
+    edu_b_title: "Bachelor in Data Marketing &amp; AI · Licence degree",
+    edu_b_p: "Third year. Digital, data, digital marketing and artificial intelligence. Courses: SQL, Python, Power BI, business intelligence, digital marketing.",
+    edu_apu_when: "May – Jun 2026",
+    edu_apu_title: "International academic programme",
+    edu_apu_org: "Asia Pacific University (APU) · Kuala Lumpur, Malaysia",
+    edu_apu_p: "Taught in English: business intelligence, digital ecosystem, artificial intelligence, project management.",
+    edu_bac_title: "French Baccalauréat (general track)",
+    edu_bac_p: "Majors in mathematics and computer science (NSI).",
+    contact_title: "Let's talk",
+    contact_p: "I'm open to conversations about a work-study Master's starting in 2027, and about data, AI or marketing projects.",
+    copy: "Copy", copied: "Copied", write: "Write", view: "View profile ↗", k_loc: "Location",
+    foot_made: "Designed and coded in HTML, CSS and JavaScript",
+    foot_top: "↑ Back to top"
+  };
+  var FR_EXTRA = { copied: "Copié" };
+
+  var nodes = document.querySelectorAll("[data-i18n]");
+  var FR = {};
+  nodes.forEach(function (n) { if (!(n.dataset.i18n in FR)) FR[n.dataset.i18n] = n.innerHTML; });
+  for (var k in FR_EXTRA) FR[k] = FR_EXTRA[k];
+
+  var current = "fr";
+  var buttons = document.querySelectorAll(".lang button");
+
+  function t(key) { return (current === "en" ? EN : FR)[key]; }
+
+  function setLang(lang) {
+    current = lang;
+    var dict = lang === "en" ? EN : FR;
+    nodes.forEach(function (n) {
+      var v = dict[n.dataset.i18n];
+      if (v != null) n.innerHTML = v;
+    });
+    document.documentElement.lang = lang;
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+    try { localStorage.setItem("hn-lang", lang); } catch (e) {}
+  }
+
+  var initial = "fr";
+  try { var saved = localStorage.getItem("hn-lang"); if (saved === "en" || saved === "fr") initial = saved; } catch (e) {}
+  if (location.hash === "#en") initial = "en";
+  if (location.hash === "#fr") initial = "fr";
+  if (initial !== "fr") setLang(initial);
+
+  buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+
+  var copyBtn = document.getElementById("copy-email");
+  var emailEl = document.getElementById("email-text");
+  var resetTimer;
+  function flash() {
+    copyBtn.textContent = t("copied");
+    copyBtn.classList.add("done");
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(function () { copyBtn.innerHTML = t("copy"); copyBtn.classList.remove("done"); }, 2000);
+  }
+  function selectEmail() {
+    try {
+      var range = document.createRange();
+      range.selectNodeContents(emailEl);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } catch (e) {}
+  }
+  copyBtn.addEventListener("click", function () {
+    var text = emailEl.textContent.trim();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(flash, selectEmail);
+    } else {
+      selectEmail();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
